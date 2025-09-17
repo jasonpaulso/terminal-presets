@@ -7,7 +7,7 @@ const showErrorMessage = (message: string) => {
     vscode.window.showErrorMessage(message)
 }
 
-const loadConfig = (): Config | null => {
+export const loadConfig = (): Config | null => {
     const configFile = findConfigFile()
     if (!configFile) {
         showErrorMessage("No config file found")
@@ -42,7 +42,10 @@ const selectPreset = async (presets: Preset[]): Promise<Preset | null> => {
     return preset
 }
 
-const validateCwd = (terminal: Preset["terminals"][number], presetName: string) => {
+const validateCwd = (
+    terminal: Preset["terminals"][number],
+    presetName: string
+) => {
     if (terminal.cwd && !fs.existsSync(terminal.cwd)) {
         showErrorMessage(
             `Invalid working dir "${terminal.cwd}" for terminal "${terminal.name}" in preset "${presetName}"`
@@ -73,6 +76,8 @@ const launchPresetTerminals = (preset: Preset) => {
         }
     })
 }
+
+export const runPreset = launchPresetTerminals
 
 export const command = async () => {
     const config = loadConfig()

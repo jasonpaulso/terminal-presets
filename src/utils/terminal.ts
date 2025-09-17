@@ -13,12 +13,18 @@ const TERMINAL_COLOR_KEYS: Record<TerminalColor, string> = {
     [TerminalColor.yellow]: "terminal.ansiYellow",
 }
 
-const resolveTerminalColor = (color?: TerminalColor) =>
-    color ? new vscode.ThemeColor(TERMINAL_COLOR_KEYS[color]) : undefined
+const resolveTerminalColor = (color?: TerminalColor) => {
+    if (!color) {
+        return undefined
+    }
+
+    const colorKey = TERMINAL_COLOR_KEYS[color]
+    return colorKey ? new vscode.ThemeColor(colorKey) : undefined
+}
 
 const parseSplitLocation = (
     location: string
-): vscode.TerminalSplitLocationOptions | null => {
+): vscode.TerminalEditorLocationOptions | null => {
     const [, column] = location.split(":")
     if (!column) {
         return null
@@ -42,13 +48,14 @@ const resolveTerminalLocation = (
         return vscode.TerminalLocation.Panel
     }
 
-    const normalized = location.toLowerCase()
+    const locationString = location as string
+    const normalized = locationString.toLowerCase()
     if (normalized === "editor") {
         return vscode.TerminalLocation.Editor
     }
 
     if (normalized.startsWith("split")) {
-        return parseSplitLocation(location) ?? vscode.TerminalLocation.Panel
+        return parseSplitLocation(locationString) ?? vscode.TerminalLocation.Panel
     }
 
     return vscode.TerminalLocation.Panel
