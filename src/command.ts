@@ -1,10 +1,10 @@
 import * as fs from "fs"
 import * as vscode from "vscode"
 import {
+    Config,
     findConfigFile,
     parseConfig,
     Terminal,
-    Config,
     TerminalColor,
 } from "./config"
 import { isNonEmptyString } from "./utils"
@@ -23,6 +23,32 @@ function convertToTerminalOptions(terminal: Terminal): vscode.TerminalOptions {
         [TerminalColor.white]: "terminal.ansiWhite",
         [TerminalColor.yellow]: "terminal.ansiYellow",
     }
+
+    let terminalLocation:
+        | vscode.TerminalLocation
+        | vscode.TerminalEditorLocationOptions
+        | vscode.TerminalSplitLocationOptions =
+        terminal.location?.toLowerCase() === "editor"
+            ? vscode.TerminalLocation.Editor
+            : vscode.TerminalLocation.Panel
+
+    if (isNonEmptyString(terminal.location)) {
+        if (terminal.location?.toLowerCase().startsWith("split")) {
+            const parts = terminal.location.split(":")
+            if (parts.length === 2) {
+                const groupNumber = parseInt(parts[1], 10)
+                if (!isNaN(groupNumber) && groupNumber > 0) {
+                    terminalLocation = {
+                        viewColumn: groupNumber,
+                    }
+                }
+            } else {
+                terminalLocation = vscode.TerminalLocation.Panel
+            }
+        }
+    }
+    const icon = new vscode.ThemeIcon(terminal.icon || "terminal")
+
     return {
         color: terminal.color
             ? new vscode.ThemeColor(colorMap[terminal.color])
@@ -35,9 +61,8 @@ function convertToTerminalOptions(terminal: Terminal): vscode.TerminalOptions {
             : undefined,
         shellArgs: terminal.shellArgs,
         shellPath: terminal.shellPath,
-        iconPath: terminal.icon
-            ? new vscode.ThemeIcon(terminal.icon)
-            : undefined,
+        iconPath: icon,
+        location: terminalLocation,
     }
 }
 
@@ -57,13 +82,13 @@ export const command = async () => {
         if (err instanceof Error) {
             vscode.window.showErrorMessage(err.message)
         } else {
-            vscode.window.showErrorMessage("Failled to load configuration file")
+            vscode.window.showErrorMessage("Failed to load configuration file")
         }
         return
     }
 
     if (!config) {
-        vscode.window.showErrorMessage("Failled to load configuration file")
+        vscode.window.showErrorMessage("Failed to load configuration file")
         return
     }
 
@@ -87,17 +112,16 @@ export const command = async () => {
                 `Invalid working dir "${terminal.cwd}" for terminal "${terminal.name}" in preset "${preset.name}"`
             )
         } else {
-            const t = convertToTerminalOptions(terminal)
-            if (typeof t.shellPath === "string" && t.shellPath.length > 0) {
-                const terminalInstance = vscode.window.createTerminal(t)
-                if (terminal.command) {
-                    terminalInstance.sendText(terminal.command, true)
-                }
+            const terminalOptions = convertToTerminalOptions(terminal)
+            if (
+                typeof terminalOptions.shellPath === "string" &&
+                terminalOptions.shellPath.length > 0
+            ) {
+                const terminalInstance =
+                    vscode.window.createTerminal(terminalOptions)
                 terminalInstance.show()
-            } else {
-                vscode.window.showErrorMessage(
-                    `Invalid shell path for terminal "${terminal.name}" in preset "${preset.name}"`
-                )
+                terminal.command &&
+                    terminalInstance.sendText(terminal.command, true)
             }
         }
     })

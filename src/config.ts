@@ -25,6 +25,7 @@ export interface Terminal {
     shellPath?: string
     shellArgs?: string[]
     command?: string
+    location?: string
 }
 
 export interface Preset {

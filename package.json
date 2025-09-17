@@ -1,7 +1,7 @@
 {
     "name": "terminal-presets",
     "displayName": "Terminal presets",
-    "description": "Quickly create presets of preconfigured terminals (including name, icon, color...)",
+    "description": "Quickly create presets of pre-configured terminals (including name, icon, color...)",
     "publisher": "clement-vidal-vscode",
     "version": "1.2.0",
     "icon": "icon.png",
@@ -20,9 +20,7 @@
     "categories": [
         "Other"
     ],
-    "activationEvents": [
-        "onCommand:terminal-presets.terminal-presets"
-    ],
+    "activationEvents": [],
     "main": "./dist/extension.js",
     "contributes": {
         "commands": [
@@ -30,7 +28,16 @@
                 "command": "terminal-presets.terminal-presets",
                 "title": "Terminal presets"
             }
-        ]
+        ],
+        "icons": {
+            "claude-icon": {
+                "description": "claude-icon",
+                "default": {
+                    "fontPath": "./claude-icon.woff",
+                    "fontCharacter": "\\E900"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "yarn run package",
@@ -41,6 +48,7 @@
     },
     "devDependencies": {
         "@types/glob": "^7.1.3",
+        "@types/minimatch": "^6.0.0",
         "@types/node": "14.x",
         "@types/vscode": "^1.60.0",
         "@typescript-eslint/eslint-plugin": "^4.26.0",

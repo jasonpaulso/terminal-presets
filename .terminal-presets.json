@@ -1,0 +1,34 @@
+{
+    "default": {
+        "cwd": ".",
+        "icon": "terminal",
+        "shellArgs": ["-l"],
+        "shellPath": "/bin/zsh"
+    },
+    "presets": [
+        {
+            "name": "Claude Code",
+            "terminals": [
+                {
+                    "color": "black",
+                    "command": "claude",
+                    "icon": "claude-icon",
+                    "location": "editor",
+                    "name": "Claude Code"
+                }
+            ]
+        },
+        {
+            "name": "Claude Code - Yolo",
+            "terminals": [
+                {
+                    "color": "red",
+                    "command": "claude --dangerously-skip-permissions",
+                    "icon": "claude-icon",
+                    "location": "editor",
+                    "name": "Claude Code - Yolo"
+                }
+            ]
+        }
+    ]
+}
