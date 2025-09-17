@@ -33,8 +33,22 @@
             "claude-icon": {
                 "description": "claude-icon",
                 "default": {
-                    "fontPath": "./claude-icon.woff",
+                    "fontPath": "./icons.woff",
                     "fontCharacter": "\\E900"
+                }
+            },
+            "gemini-icon": {
+                "description": "gemini-icon",
+                "default": {
+                    "fontPath": "./icons.woff",
+                    "fontCharacter": "\\E902"
+                }
+            },
+            "codex-icon": {
+                "description": "codex-icon",
+                "default": {
+                    "fontPath": "./icons.woff",
+                    "fontCharacter": "\\E901"
                 }
             }
         }

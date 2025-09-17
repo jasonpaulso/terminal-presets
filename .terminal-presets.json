@@ -29,6 +29,54 @@
                     "name": "Claude Code - Yolo"
                 }
             ]
+        },
+        {
+            "name": "Gemini",
+            "terminals": [
+                {
+                    "color": "blue",
+                    "command": "gemini",
+                    "icon": "gemini-icon",
+                    "location": "editor",
+                    "name": "Gemini"
+                }
+            ]
+        },
+        {
+            "name": "Gemini - Yolo",
+            "terminals": [
+                {
+                    "color": "blue",
+                    "command": "gemini --yolo",
+                    "icon": "gemini-icon",
+                    "location": "editor",
+                    "name": "Gemini - Yolo"
+                }
+            ]
+        },
+        {
+            "name": "Codex",
+            "terminals": [
+                {
+                    "color": "green",
+                    "command": "codex",
+                    "icon": "codex-icon",
+                    "location": "editor",
+                    "name": "Codex"
+                }
+            ]
+        },
+        {
+            "name": "Codex - Yolo",
+            "terminals": [
+                {
+                    "color": "green",
+                    "command": "codex --yolo",
+                    "icon": "codex-icon",
+                    "location": "editor",
+                    "name": "Codex - Yolo"
+                }
+            ]
         }
     ]
 }
