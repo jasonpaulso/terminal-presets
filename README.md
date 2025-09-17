@@ -1,10 +1,10 @@
-# Terminal presets
+# Agent Presets
 
-Quickly create presets of preconfigured terminals (including terminal name, icon, color...)
+Quickly create presets of pre-configured terminals (including terminal name, icon, color...)
 
-This extension can be usefull when working in a monorepo where you work with multiple terminals open at the same time:
+This extension can be useful when working in a monorepo where you work with multiple terminals open at the same time:
 
-Instead of creating each terminal manually, write a config file that will describe your "terminal presets".
+Instead of creating each terminal manually, write a config file that will describe your "agent presets".
 
 Each terminal preset consist of a name and a list of terminal to create.
 For each terminal in a preset you can configure:
@@ -18,7 +18,7 @@ For each terminal in a preset you can configure:
 
 First create a config file named `.terminal-presets.json` in your root folder.
 
-Search in the command palette for the `Terminal presets` command.
+Search in the command palette for the `Agent Presets` command.
 
 Once invoked this command will ask you to select a preset and will create the appropriate terminals.
 
@@ -53,7 +53,7 @@ interface Terminal {
   // The color of the terminal icon
   // See below for a list of available color
   color?: TerminalColor;
-  // A map of enironment variable to pass to the terminal
+  // A map of environment variable to pass to the terminal
   env?: Record<string, string>;
   // The path to your favorite shell
   shellPath?: string;
@@ -67,7 +67,7 @@ interface Terminal {
 interface Preset {
   // Name displayed in the preset picker
   name: string;
-  // The list of terminal to instanciate for that profile
+  // The list of terminal to instantiate for that profile
   terminals: Terminal[];
 }
 
@@ -93,7 +93,7 @@ Once a terminal configuration is merged with the `default` config, if some field
 ### Available icons
 
 You can provide any icon listed here:  
-https://code.visualstudio.com/api/references/icons-in-labels#icon-listing
+[VS Code Icon Listing](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing)
 
 ### Available colors
 

@@ -1,10 +1,10 @@
 {
     "name": "terminal-presets",
-    "displayName": "Terminal presets",
+    "displayName": "Agent Presets",
     "description": "Quickly create presets of pre-configured terminals (including name, icon, color...)",
     "publisher": "clement-vidal-vscode",
     "version": "1.2.0",
-    "icon": "icon.png",
+    "icon": "agent-presets.png",
     "keywords": [
         "terminal",
         "monorepo",
@@ -26,28 +26,28 @@
         "commands": [
             {
                 "command": "terminal-presets.terminal-presets",
-                "title": "Terminal presets"
+                "title": "Agent Presets"
             }
         ],
         "icons": {
             "claude-icon": {
                 "description": "claude-icon",
                 "default": {
-                    "fontPath": "./icons.woff",
+                    "fontPath": "icons.woff",
                     "fontCharacter": "\\E900"
                 }
             },
             "gemini-icon": {
                 "description": "gemini-icon",
                 "default": {
-                    "fontPath": "./icons.woff",
+                    "fontPath": "icons.woff",
                     "fontCharacter": "\\E902"
                 }
             },
             "codex-icon": {
                 "description": "codex-icon",
                 "default": {
-                    "fontPath": "./icons.woff",
+                    "fontPath": "icons.woff",
                     "fontCharacter": "\\E901"
                 }
             }

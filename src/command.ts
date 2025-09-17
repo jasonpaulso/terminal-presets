@@ -30,7 +30,7 @@ export const loadConfig = (): Config | null => {
 const selectPreset = async (presets: Preset[]): Promise<Preset | null> => {
     const choice = await vscode.window.showQuickPick(
         presets.map((preset) => preset.name),
-        { title: "Select a terminal preset" }
+        { title: "Select an Agent preset" }
     )
 
     const preset = presets.find((p) => p.name === choice)
@@ -66,6 +66,7 @@ const launchTerminal = (terminal: Preset["terminals"][number]) => {
         if (terminal.command) {
             terminalInstance.sendText(terminal.command, true)
         }
+        vscode.commands.executeCommand("workbench.action.pinEditor")
     }
 }
 
@@ -76,8 +77,6 @@ const launchPresetTerminals = (preset: Preset) => {
         }
     })
 }
-
-export const runPreset = launchPresetTerminals
 
 export const command = async () => {
     const config = loadConfig()
